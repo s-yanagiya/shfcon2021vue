@@ -193,6 +193,47 @@ export default {
             // console.log(gameInfo)
             // console.log(gameInfo.roundInfoList[0].roundId)
             // this.gameInfo = gameInfo;
+        },
+        createBlocks(round, finalRound){
+          const minimumWidth = 50;
+          // 両脇の幅
+          const sideNonBlockWidth = minimumWidth * (2 ** (round - 1));
+          // ラウンドブロックの幅
+          const roundBlockWidth = minimumWidth * (2 ** round);
+          // ラウンド間のブロックの幅
+          const middleNonBlockWidth = minimumWidth * (2 ** round);
+          // そのラウンドの対局数を計算
+          const station = minimumWidth * (2 ** (finalRound - round));
+          
+          const blocks = [];
+          // 左脇のブロックを追加
+          const sideBlockLeft = {
+              blockStyle: {width: sideBlockWidth + "px"},
+              blockClass: {}
+          };
+          blocks.push(sideBlockLeft);
+          // 
+          for(var i = 0; i < station; i++){
+              const roundBlock = {
+                  blockStyle: {width: roundBlockWidth + "px"},
+                  blockClass: {round: true}
+              };
+              blocks.push(roundBlock);
+              if(i > 0 && (i+1) < station){
+                  const middleNonBlock = {
+                      blockStyle: {width: middleNonBlockWidth + "px"},
+                      blockClass: {round: true}
+                  };
+                  blocks.push(middleNonBlock);
+              }
+          }
+          // 右脇のブロックを追加
+          const sideBlockRight = {
+              blockStyle: {width: sideBlockWidth + "px"},
+              blockClass: {}
+          };
+          blocks.push(sideBlockRight);
+          return blocks;
         }
     }
   }
