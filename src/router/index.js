@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Addresses from '../views/Addresses.vue'
 import AddressForm from '../views/AddressForm.vue'
 import Tournament from '../views/Tournament.vue'
+import TournamentList from '../views/TournamentList.vue'
 
 Vue.use(VueRouter)
 
@@ -32,9 +33,14 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
   {
-    path: '/tournament',
+    path: '/tournament/:game_id?',
     name: 'tournament',
     component: Tournament
+  },
+  {
+    path: '/tournamentList',
+    name: 'tournamentList',
+    component: TournamentList
   },
 ]
 

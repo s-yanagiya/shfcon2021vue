@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid fill-height>
+  <v-container fluid>
     <v-navigation-drawer v-model="$store.state.drawer" absolute temporary>
       <v-list>
         <v-list-item>
@@ -34,7 +34,8 @@ export default {
     return {
       items: [
         { title: 'プレイヤー一覧', icon: 'mdi-menu' , link: { name: 'addresses'} },
-        { title: 'トーナメント', icon: 'mdi-menu' , link: { name: 'tournament'} }
+        { title: 'トーナメント', icon: 'mdi-menu' , link: { name: 'tournament'} },
+        { title: 'トーナメント一覧', icon: 'mdi-menu' , link: { name: 'tournamentList'} }
       ]
     }
   },

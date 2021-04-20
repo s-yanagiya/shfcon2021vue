@@ -36,17 +36,32 @@ export default {
       if (user) {
         this.setLoginUser(user)
         this.fetchAddresses()
+        user.getIdToken(true).then(function(idToken) {
+          console.log("bbb");
+          console.log(idToken);
+          localStorage.setItem('jwt', idToken);
+        }).catch(function(error) {
+          console.log(error);
+        });
         if (this.$router.currentRoute.name === 'home') {
           this.$router.push({ name: 'addresses' }, () => {})
         }
       } else {
         this.deleteLoginUser()
+        localStorage.removeItem('jwt');
         this.$router.push({ name: 'home' }, () => {})
       }
+      // firebase.auth().currentUser.getIdToken(true).then(function(idToken) {
+      // // Send token to your backend via HTTPS
+      // // ...
+      // console.log("aaa");
+      // console.log(idToken);
+      // });
     })
+    
   },
   data: () => ({
-    //
+    
   }),
   methods: {
     ...mapActions(['toggleSideMenu', 'setLoginUser', 'logout', 'deleteLoginUser', 'fetchAddresses'])
