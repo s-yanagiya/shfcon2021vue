@@ -35,7 +35,11 @@ export default {
     methods: {
         async search(){
             const baseUrl = 'http://localhost:8081/tournament/game'
-            const gameInfoList = await fetch(baseUrl).then(x => x.json());
+            const gameInfoList = await fetch(baseUrl, {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+                },
+            }).then(x => x.json());
             gameInfoList.forEach(gameInfo =>{
                 this.tournaments.push({
                     gameId: gameInfo.gameId

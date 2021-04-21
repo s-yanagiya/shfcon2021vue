@@ -30,7 +30,11 @@ export default {
           }
           const queryParams = new URLSearchParams(params);
 
-          const gameInfo = await fetch(baseUrl + queryParams).then(x => x.json());
+          const gameInfo = await fetch(baseUrl + queryParams, {
+              headers: {
+                  'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+              },
+          }).then(x => x.json());
           // const gameId = gameInfo.gameId;
           // const gameName = gameInfo.gameName;
           // const participantsNum = gameInfo.participantsNum;
