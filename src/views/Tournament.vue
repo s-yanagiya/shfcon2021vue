@@ -1,6 +1,6 @@
 <template>
   <div class="parent">
-    <h1>トーナメント一覧</h1>
+    <h1>トーナメント一覧yanagiya</h1>
     <div v-for="(container, key) in containers" :key="key" class="container">
       <span v-for="(block, key) in container" :key="key" v-bind:style="block.blockStyle" v-bind:class="block.blockClass">{{block.playerName}}</span>
     </div>
