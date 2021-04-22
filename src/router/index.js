@@ -5,7 +5,8 @@ import Addresses from '../views/Addresses.vue'
 import AddressForm from '../views/AddressForm.vue'
 import Tournament from '../views/Tournament.vue'
 import TournamentList from '../views/TournamentList.vue'
-
+import TournamentForm from '../views/TournamentForm.vue'
+import Top from '../views/Top.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -41,6 +42,16 @@ const routes = [
     path: '/tournamentList',
     name: 'tournamentList',
     component: TournamentList
+  },
+  {
+    path: '/tournamentForm',
+    name: 'tournamentForm',
+    component: TournamentForm
+  },
+  {
+    path: '/top',
+    name: 'top',
+    component: Top
   },
 ]
 

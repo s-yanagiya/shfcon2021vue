@@ -1,11 +1,11 @@
 <template>
     <div class="parent">
-        <h1>トーナメント一覧</h1>
+        <h1>大会一覧</h1>
         <v-container text-xs-center justify-center>
             <v-layout row wrap>
                 <v-flex xs12 mt-3 justify-center>
-                    <v-data-table :headers='headers' :items='tournaments'>
-                        <template v-slot:item.action="{ item }">
+                    <v-data-table :headers='headers' :items='tournaments' hide-default-footer>
+                        <template v-slot:[`item.action`]="{ item }">
                         <router-link :to="{ name: 'tournament', params: { game_id: item.gameId }}">
                             <v-icon small class="mr-2">mdi-pencil</v-icon>
                         </router-link>
@@ -25,9 +25,9 @@ export default {
     data () {
         return {
             headers: [
-                { text: '試合名', value: 'gameName' },
+                { text: '大会名', value: 'gameName' },
                 { text: '参加者数', value: 'participantsNum' },
-                { text: '操作', value: 'action' }
+                { text: '大会結果', value: 'action' }
             ],
             tournaments: []
         }

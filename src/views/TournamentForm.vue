@@ -1,28 +1,37 @@
 <template>
-  <v-container text-xs-center>
-    <v-layout row wrap justify-center>
-      <v-flex xs12 class="text-center">
-        <h1>トーナメント追加</h1>
-      </v-flex>
-
-      <v-flex xs5 mt-5>
-        <v-card>
-          <v-card-text>
-            <v-form>
-               <v-text-field v-model="address.name" label="名前"></v-text-field>
-               <v-text-field v-model="address.tel" label="電話番号"></v-text-field>
-               <v-text-field v-model="address.email" label="メールアドレス"></v-text-field>
-               <v-text-field v-model="address.address" label="住所"></v-text-field>
-               <div class="text-center">
-                 <v-btn @click="$router.push({ name: 'addresses' })">キャンセル</v-btn>
-                 <v-btn color="info" class="ml-2" @click="submit">保存</v-btn>
-               </div>
-            </v-form>
-          </v-card-text>
-        </v-card>
-      </v-flex>
-    </v-layout>
-  </v-container>
+  <div class="parent">
+    <v-form>
+      <v-text-field v-model="gameName" label="大会名" /><br>
+      <h2>プレイヤー名を入力してください</h2>
+       <v-container v-for="(player,index) in players" :key="index">
+         <v-row>
+            <v-text-field v-model="players[index]" :label="`プレイヤー${index + 1}`" />
+            <v-btn color="red" dark depressed @click="removeInput(index)">
+              <v-icon left>mdi-delete</v-icon>削除
+            </v-btn>
+         </v-row>
+       </v-container>
+      <br>
+      <v-container>
+        <v-row style="justify-content: flex-end;">
+          <v-btn color='info' @click="addInput">追加する</v-btn>
+        </v-row>
+      </v-container>
+      <br>
+      <br>
+      <v-container>
+        <v-row style="justify-content: center;">
+          <v-btn color='success' @click="onSubmit">
+            送信する<v-icon right dark>mdi-cloud-upload</v-icon>
+          </v-btn>
+        </v-row>
+      </v-container>
+      <br>
+      <div>
+        
+      </div>
+    </v-form>
+  </div>
 </template>
 
 <script>
@@ -32,12 +41,32 @@ export default {
   },
   data () {
     return {
-      tournament: {}
+      gameName: "",
+      players: [""]
     }
   },
   methods: {
-    submit(){
-      tournament
+    removeInput(index) {
+      this.players.splice(index, 1);
+    },
+    addInput() {
+      this.players.push('');
+    },
+    async onSubmit() {
+      const baseUrl = 'http://localhost:8081/tournament/game';
+      console.log(this.gameName);
+      console.log(this.players);
+      await fetch(baseUrl, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+          , 'Content-Type': 'application/json'
+        },
+        method: "POST",
+        body: JSON.stringify({
+          gameName: this.gameName,
+          playerList: this.players
+        })
+      }).then();
     }
   }
 }

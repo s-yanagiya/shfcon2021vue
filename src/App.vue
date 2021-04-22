@@ -6,7 +6,7 @@
       dark
     >
       <v-app-bar-nav-icon v-show="$store.state.login_user" @click.stop="toggleSideMenu"></v-app-bar-nav-icon>
-      <v-toolbar-title>トーナメント</v-toolbar-title>
+      <v-toolbar-title>トーナメント作成アプリ</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items v-if="$store.state.login_user">
         <v-btn text @click="logout">ログアウト</v-btn>
@@ -37,26 +37,18 @@ export default {
         this.setLoginUser(user)
         this.fetchAddresses()
         user.getIdToken(true).then(function(idToken) {
-          console.log("bbb");
-          console.log(idToken);
           localStorage.setItem('jwt', idToken);
         }).catch(function(error) {
           console.log(error);
         });
         if (this.$router.currentRoute.name === 'home') {
-          this.$router.push({ name: 'addresses' }, () => {})
+          this.$router.push({ name: 'top' }, () => {})
         }
       } else {
         this.deleteLoginUser()
         localStorage.removeItem('jwt');
         this.$router.push({ name: 'home' }, () => {})
       }
-      // firebase.auth().currentUser.getIdToken(true).then(function(idToken) {
-      // // Send token to your backend via HTTPS
-      // // ...
-      // console.log("aaa");
-      // console.log(idToken);
-      // });
     })
     
   },

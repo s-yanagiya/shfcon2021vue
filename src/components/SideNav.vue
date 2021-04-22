@@ -33,9 +33,9 @@ export default {
   data () {
     return {
       items: [
-        { title: 'プレイヤー一覧', icon: 'mdi-menu' , link: { name: 'addresses'} },
-        { title: 'トーナメント', icon: 'mdi-menu' , link: { name: 'tournament'} },
-        { title: 'トーナメント一覧', icon: 'mdi-menu' , link: { name: 'tournamentList'} }
+        //{ title: 'プレイヤー一覧', icon: 'mdi-menu' , link: { name: 'addresses'} },
+        { title: 'トーナメント一覧', icon: 'mdi-menu' , link: { name: 'tournamentList'} },
+        { title: 'トーナメント新規登録', icon: 'mdi-menu' , link: { name: 'tournamentForm'} }
       ]
     }
   },
