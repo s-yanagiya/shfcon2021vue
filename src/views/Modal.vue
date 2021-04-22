@@ -1,74 +1,36 @@
 <template>
-  <transition name="modal" appear>
-    <!-- <div class="modal modal-overlay" @click.self="$emit('close')"> -->
-    <div class="modal modal-overlay">
-      <div class="modal-window">
-        <div class="modal-content">
-          <slot/>
-        </div>
-        <footer class="modal-footer">
-          <slot name="footer">
-            <!-- <button @click="$emit('close')">Close</button> -->
-          </slot>
-        </footer>
-      </div>
+  <div id="overlay" @click.self="$emit('close')">
+    <div id="content">
+      <p>大会結果を入力してください</p>
+      <slot/>
+      <footer class="modal-footer">
+        <slot name="footer">
+          <button @click="$emit('close')">Close</button>
+        </slot>
+      </footer>
     </div>
-  </transition>
+  </div>
 </template>
 
-<style lang="stylus" scoped>
-.modal {
-  &.modal-overlay {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: fixed;
-    z-index: 30;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-  }
+<style>
+#overlay{
+  z-index:1;
 
-  &-window {
-    background: #fff;
-    border-radius: 4px;
-    overflow: hidden;
-  }
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background-color:rgba(0,0,0,0.5);
 
-  &-content {
-    padding: 10px 20px;
-  }
-
-  &-footer {
-    background: #ccc;
-    padding: 10px;
-    text-align: right;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
-// オーバーレイのトランジション
-.modal-enter-active, .modal-leave-active {
-  transition: opacity 0.4s;
-
-  // オーバーレイに包含されているモーダルウィンドウのトランジション
-  .modal-window {
-    transition: opacity 0.4s, transform 0.4s;
-  }
-}
-
-// ディレイを付けるとモーダルウィンドウが消えた後にオーバーレイが消える
-.modal-leave-active {
-  transition: opacity 0.6s ease 0.4s;
-}
-
-.modal-enter, .modal-leave-to {
-  opacity: 0;
-
-  .modal-window {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
+#content{
+  z-index:2;
+  width:50%;
+  padding: 1em;
+  background:#fff;
 }
 </style>

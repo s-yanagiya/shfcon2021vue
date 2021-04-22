@@ -3,17 +3,51 @@
     <h1>{{gameName}}</h1>
     <v-btn color='info' @click="doUpdate()">更新</v-btn>
     <v-btn color='purple' dark @click="openModal()">大会結果入力</v-btn>
-    <MyModal @close="closeModal()" v-if="modal">
-      <!-- default スロットコンテンツ -->
-      <p>Vue.js Modal Window!</p>
-      <div><input v-model="message"></div>
-      <!-- /default -->
-      <!-- footer スロットコンテンツ -->
+    <Modal @close="closeModal()" v-if="modal">
+      <h2>{{gameName}}</h2>
+      <v-form>
+        1回戦-1
+        <v-radio-group v-model="row" row>
+          <v-radio label="左プレイヤー" value=""></v-radio>
+          <v-radio label="右プレイヤー" value=""></v-radio>
+        </v-radio-group>
+        1回戦-2
+        <v-radio-group v-model="row" row>
+          <v-radio label="左プレイヤー" value=""></v-radio>
+          <v-radio label="右プレイヤー" value=""></v-radio>
+        </v-radio-group>
+        1回戦-3
+        <v-radio-group v-model="row" row>
+          <v-radio label="左プレイヤー" value=""></v-radio>
+          <v-radio label="右プレイヤー" value=""></v-radio>
+        </v-radio-group>
+        1回戦-4
+        <v-radio-group v-model="row" row>
+          <v-radio label="左プレイヤー" value=""></v-radio>
+          <v-radio label="右プレイヤー" value=""></v-radio>
+        </v-radio-group>
+        2回戦-1
+        <v-radio-group v-model="row" row>
+          <v-radio label="左プレイヤー" value=""></v-radio>
+          <v-radio label="右プレイヤー" value=""></v-radio>
+        </v-radio-group>
+        2回戦-2
+        <v-radio-group v-model="row" row>
+          <v-radio label="左プレイヤー" value=""></v-radio>
+          <v-radio label="右プレイヤー" value=""></v-radio>
+        </v-radio-group>
+        3回戦-1
+        <v-radio-group v-model="row" row>
+          <v-radio label="左プレイヤー" value=""></v-radio>
+          <v-radio label="右プレイヤー" value=""></v-radio>
+        </v-radio-group>
+      </v-form>
       <template slot="footer">
-        <button @click="doSend()">送信</button>
+        <v-btn color='success' @click="doSend()">
+          送信する<v-icon right dark>mdi-cloud-upload</v-icon>
+        </v-btn>
       </template>
-      <!-- /footer -->
-    </MyModal>
+    </Modal>
     <div v-for="(container, key) in containers" :key="key" class="container">
       <span v-for="(block, key) in container" :key="key" v-bind:style="block.blockStyle" v-bind:class="block.blockClass">{{block.playerName}}</span>
     </div>
@@ -31,15 +65,16 @@
 
 function initialState() {
   return {
+    message: "",
     modal: false,
     gameName: "",
     gameInfo: {},
     containers: [[]]
   }
 }
-import MyModal from './MyModal.vue'
+import Modal from './Modal.vue'
 export default {
-    components: { MyModal },
+    components: { Modal },
     created() {
       if(!this.$route.params.game_id){
         return;
@@ -62,7 +97,8 @@ export default {
           this.message = ''
           this.closeModal()
         } else {
-          alert('メッセージを入力してください')
+          alert('サーバに送信');
+          this.closeModal();
         }
       },
       async search(){
@@ -269,7 +305,7 @@ export default {
     background-color:black;
  }
 .winner:before{
-    background-color:blue;
+    background-color:red;
 }
 .winner.left::after,.winner.right::after{
     content: "";

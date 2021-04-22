@@ -26,10 +26,6 @@
           </v-btn>
         </v-row>
       </v-container>
-      <br>
-      <div>
-        
-      </div>
     </v-form>
   </div>
 </template>

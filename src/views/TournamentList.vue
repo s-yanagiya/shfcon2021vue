@@ -34,7 +34,8 @@ export default {
     },
     methods: {
         async search(){
-            const baseUrl = 'http://localhost:8081/tournament/game'
+            //const baseUrl = 'http://localhost:8081/tournament/game'
+            const baseUrl = 'http://52.198.50.158:8081/tournament/game'
             const gameInfoList = await fetch(baseUrl, {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('jwt')}`
