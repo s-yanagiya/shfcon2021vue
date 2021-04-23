@@ -49,7 +49,8 @@ export default {
       this.players.push('');
     },
     async onSubmit() {
-      const baseUrl = 'http://localhost:8081/tournament/game';
+      //const baseUrl = 'http://localhost:8081/tournament/game';
+      const baseUrl = 'http://52.198.50.158:8081/tournament/game';
       console.log(this.gameName);
       console.log(this.players);
       await fetch(baseUrl, {

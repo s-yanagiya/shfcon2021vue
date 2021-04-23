@@ -102,7 +102,8 @@ export default {
         }
       },
       async search(){
-        const baseUrl = 'http://localhost:8081/tournament/game?'
+        //const baseUrl = 'http://localhost:8081/tournament/game?'
+        const baseUrl = 'http://52.198.50.158:8081/tournament/game?'
         const params = {
             gameId: this.$route.params.game_id
         }
